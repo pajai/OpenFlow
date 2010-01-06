@@ -26,7 +26,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "AFOpenFlowConstants.h"
 
-
 @implementation AFItemView
 @synthesize number, imageView, horizontalPosition, verticalPosition;
 

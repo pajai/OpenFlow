@@ -30,7 +30,6 @@
 
 @synthesize window;
 
-
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    
     
     // Override point for customization after app launch

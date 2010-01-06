@@ -23,8 +23,9 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 #import <UIKit/UIKit.h>
-#import "AFItemView.h"
 #import <QuartzCore/QuartzCore.h>
+
+#import "AFItemView.h"
 
 @protocol AFOpenFlowViewDataSource;
 @protocol AFOpenFlowViewDelegate;

@@ -23,15 +23,16 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 #import <UIKit/UIKit.h>
+#import "SBNotifyingWindow.h"
 
 @class AFOpenFlowViewController;
 
 @interface AFOpenFlowAppDelegate : NSObject <UIApplicationDelegate> {
-    UIWindow *window;
+    SBNotifyingWindow *window;
     AFOpenFlowViewController *viewController;
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (nonatomic, retain) IBOutlet SBNotifyingWindow *window;
 @property (nonatomic, retain) IBOutlet AFOpenFlowViewController *viewController;
 
 @end

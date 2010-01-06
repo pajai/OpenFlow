@@ -53,6 +53,7 @@
 		86E5B65D10257F580044EE2C /* 27.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 86E5B63F10257F580044EE2C /* 27.jpg */; };
 		86E5B65E10257F580044EE2C /* 28.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 86E5B64010257F580044EE2C /* 28.jpg */; };
 		86E5B65F10257F580044EE2C /* 29.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 86E5B64110257F580044EE2C /* 29.jpg */; };
+		AB1C1D7310F490C80060F12D /* SBNotifyingWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AB1C1D7210F490C80060F12D /* SBNotifyingWindow.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +138,8 @@
 		86E5B64010257F580044EE2C /* 28.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 28.jpg; path = "Sample Images/28.jpg"; sourceTree = "<group>"; };
 		86E5B64110257F580044EE2C /* 29.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 29.jpg; path = "Sample Images/29.jpg"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* AFOpenFlowDemo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AFOpenFlowDemo-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		AB1C1D7110F490C80060F12D /* SBNotifyingWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBNotifyingWindow.h; sourceTree = "<group>"; };
+		AB1C1D7210F490C80060F12D /* SBNotifyingWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBNotifyingWindow.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,6 +230,8 @@
 		8641EAC3103B3A4200D65BBF /* OpenFlow */ = {
 			isa = PBXGroup;
 			children = (
+				AB1C1D7110F490C80060F12D /* SBNotifyingWindow.h */,
+				AB1C1D7210F490C80060F12D /* SBNotifyingWindow.m */,
 				8641EAC4103B3A4200D65BBF /* AFItemView.h */,
 				8641EAC5103B3A4200D65BBF /* AFItemView.m */,
 				8641EAC6103B3A4200D65BBF /* AFOpenFlowConstants.h */,
@@ -402,6 +407,7 @@
 				8641EACB103B3A4200D65BBF /* AFItemView.m in Sources */,
 				8641EACC103B3A4200D65BBF /* AFOpenFlowView.m in Sources */,
 				8641EACD103B3A4200D65BBF /* AFUIImageReflection.m in Sources */,
+				AB1C1D7310F490C80060F12D /* SBNotifyingWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
