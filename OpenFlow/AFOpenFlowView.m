@@ -281,13 +281,14 @@ const static CGFloat kReflectionFraction = 0.85;
 		return;
 	
 	CGPoint movedPoint = [[touches anyObject] locationInView:self]; //where we are now
-    CGPoint prevPoint = [[touches anyObject] previousLocationInView:self]; //where we just were
-    CGFloat xDirection = movedPoint.x - prevPoint.x;
     
 	CGFloat offset = startPosition - (movedPoint.x / 1.5);
 	CGPoint newPoint = CGPointMake(offset, 0);
 	scrollView.contentOffset = newPoint;
-	int newCover = (offset / COVER_SPACING);
+    
+    //set selected cover on the halfway point between them rather than ON the point
+    //this makes moving left vs. moving right consistent
+	int newCover = ( (offset + floorf(COVER_SPACING*.5)) / COVER_SPACING );
 	if (newCover != selectedCoverView.number) {
 		if (newCover < 0)
 			[self setSelectedCover:0];
