@@ -254,7 +254,7 @@ const static CGFloat kReflectionFraction = 0.85;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-	CGPoint startPoint = [[touches anyObject] locationInView:self];
+    CGPoint startPoint = [[touches anyObject] locationInView:self];
 	isDraggingACover = NO;
 	
 	// Which cover did the user tap?
@@ -297,9 +297,20 @@ const static CGFloat kReflectionFraction = 0.85;
 		else
 			[self setSelectedCover:newCover];
 	}
+    
+    lastMoveTimestamp = [event timestamp];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    CGPoint prePoint = [[touches anyObject] previousLocationInView:self];
+    CGPoint endPoint = [[touches anyObject] locationInView:self];
+    
+    CGFloat distanceTraveledX = prePoint.x - endPoint.x;
+    NSTimeInterval durationOfLastMove = [event timestamp] - lastMoveTimestamp;
+    CGFloat velocityX = distanceTraveledX / durationOfLastMove;
+    NSLog(@"velocityX = %lf", velocityX);
+    
+    
 	if (isSingleTap) {
 		// Which cover did the user tap?
 		CGPoint targetPoint = [[touches anyObject] locationInView:self];

@@ -57,6 +57,7 @@
 	Boolean isDoubleTap;
 	Boolean isDraggingACover;
 	CGFloat startPosition;
+    NSTimeInterval lastMoveTimestamp;
 }
 
 @property (nonatomic, assign) id <AFOpenFlowViewDataSource> dataSource;
