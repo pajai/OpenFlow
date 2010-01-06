@@ -23,14 +23,12 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 #import "AFGetImageOperation.h"
-#import "UIImageExtras.h"
+
 
 @implementation AFGetImageOperation
-@synthesize imageURL;
 
-- (id)initWithIndex:(int)imageIndex viewController:(AFOpenFlowViewController *)viewController {
+- (id)initWithIndex:(int)imageIndex viewController:(OpenFlowProjectViewController *)viewController {
     if (self = [super init]) {
-		imageURL = nil;
 		photoIndex = imageIndex;
 		mainViewController = [viewController retain];
     }
@@ -38,7 +36,6 @@
 }
 
 - (void)dealloc {
-	[imageURL release];
 	[mainViewController release];
 	
     [super dealloc];
@@ -46,29 +43,16 @@
 
 - (void)main {
     NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-
-	if (imageURL) {
-		// Create a UIImage from the imageURL.
-		NSData *photoData = [NSData dataWithContentsOfURL:imageURL];
-		UIImage *photo = [UIImage imageWithData:photoData];
-		
-		if (photo) {
-			[mainViewController performSelectorOnMainThread:@selector(imageDidLoad:) 
-												 withObject:[NSArray arrayWithObjects:photo, [NSNumber numberWithInt:photoIndex], nil] 
-											  waitUntilDone:YES];
-		}
-	} else {
-		// Load an image named photoIndex.jpg from our Resources.
-		NSString *imageName = [[NSString alloc] initWithFormat:@"%d.jpg", photoIndex];
-		UIImage *theImage = [UIImage imageNamed:imageName];
-		if (theImage) {
-			[mainViewController performSelectorOnMainThread:@selector(imageDidLoad:) 
-												 withObject:[NSArray arrayWithObjects:theImage, [NSNumber numberWithInt:photoIndex], nil] 
-											  waitUntilDone:YES];
-		} else
-			NSLog(@"Unable to find sample image: %@", imageName);
-		[imageName release];
-	}
+    // Load an image named photoIndex.jpg from our Resources.
+    NSString *imageName = [[NSString alloc] initWithFormat:@"%d.jpg", photoIndex];
+    UIImage *theImage = [UIImage imageNamed:imageName];
+    if (theImage) {
+        [mainViewController performSelectorOnMainThread:@selector(imageDidLoad:) 
+                                             withObject:[NSArray arrayWithObjects:theImage, [NSNumber numberWithInt:photoIndex], nil] 
+                                          waitUntilDone:YES];
+    } else
+        NSLog(@"Unable to find sample image: %@", imageName);
+    [imageName release];
 	
 	[pool release];
 }

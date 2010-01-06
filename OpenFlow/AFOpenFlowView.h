@@ -26,13 +26,13 @@
 #import "AFItemView.h"
 #import <QuartzCore/QuartzCore.h>
 
-
 @protocol AFOpenFlowViewDataSource;
 @protocol AFOpenFlowViewDelegate;
 
-@interface AFOpenFlowView : UIView {
+@interface AFOpenFlowView : UIScrollView <UIScrollViewDelegate> {
 	id <AFOpenFlowViewDataSource>	dataSource;
 	id <AFOpenFlowViewDelegate>	viewDelegate;
+
 	NSMutableSet					*offscreenCovers;
 	NSMutableDictionary				*onscreenCovers;
 	NSMutableDictionary				*coverImages;
@@ -40,7 +40,6 @@
 	UIImage							*defaultImage;
 	CGFloat							defaultImageHeight;
 
-	UIScrollView					*scrollView;
 	int								lowerVisibleCover;
 	int								upperVisibleCover;
 	int								numberOfImages;
@@ -57,11 +56,10 @@
 	Boolean isDoubleTap;
 	Boolean isDraggingACover;
 	CGFloat startPosition;
-    NSTimeInterval lastMoveTimestamp;
 }
 
-@property (nonatomic, assign) id <AFOpenFlowViewDataSource> dataSource;
-@property (nonatomic, assign) id <AFOpenFlowViewDelegate> viewDelegate;
+@property (nonatomic, assign) IBOutlet id <AFOpenFlowViewDataSource> dataSource;
+@property (nonatomic, assign) IBOutlet id <AFOpenFlowViewDelegate> viewDelegate;
 @property (nonatomic, retain) UIImage *defaultImage;
 @property int numberOfImages;
 

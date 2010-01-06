@@ -42,8 +42,24 @@
     [super dealloc];
 }
 
-- (void)awakeFromNib {
-    [self setWantsFullScreenLayout:YES];
+- (void)loadView;
+{
+    AFOpenFlowView *aView = [[AFOpenFlowView alloc] initWithFrame:CGRectZero];
+    self.view = aView;
+    aView.viewDelegate = self;
+    aView.dataSource = self;
+    self.view = aView;
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    return self;
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
 	loadImagesOperationQueue = [[NSOperationQueue alloc] init];
 	UIAlertView *openFlowImageSourceAlertView = [[UIAlertView alloc] initWithTitle:@"OpenFlow Demo Data Source" 
 																		   message:@"Would you like to download images from Flickr or use 30 sample images included with this project?" 
@@ -137,6 +153,13 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
 	return YES;
 }
+//
+//- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation;
+//{
+//    CGRect frame = [self.view frame];
+//    frame.origin.x = frame.origin.y = 0;
+//    openFlowView.frame = frame;
+//}
 
 - (UIImage *)defaultImage {
 	return [UIImage imageNamed:@"default.png"];

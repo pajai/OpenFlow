@@ -34,7 +34,12 @@
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    
     
     // Override point for customization after app launch
-    [window addSubview:viewController.view];
+    AFOpenFlowViewController *aviewController = [[AFOpenFlowViewController alloc] initWithNibName:nil bundle:nil];
+    self.viewController = aviewController;
+    [window addSubview:aviewController.view];
+    CGRect aRect = [window frame];
+    aRect.origin.x = aRect.origin.y = 0.0;
+    [aviewController.view setFrame:aRect];
     [window makeKeyAndVisible];
 }
 

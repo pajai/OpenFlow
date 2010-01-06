@@ -23,20 +23,13 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 #import <UIKit/UIKit.h>
-#import "AFOpenFlowView.h"
-#import "ObjectiveFlickr.h"
+#import "OpenFlowProjectViewController.h"
 
-
-@interface AFOpenFlowViewController : UIViewController <AFOpenFlowViewDataSource, AFOpenFlowViewDelegate, OFFlickrAPIRequestDelegate> {
-    AFOpenFlowView *openFlowView;
-	NSArray *coverImageData;
-	OFFlickrAPIContext *flickrContext;
-	OFFlickrAPIRequest *interestingnessRequest;
-	NSDictionary *interestingPhotosDictionary;
-	NSOperationQueue *loadImagesOperationQueue;
+@interface AFGetImageOperation : NSOperation {
+	OpenFlowProjectViewController *mainViewController;
+	int photoIndex;
 }
 
-- (void)imageDidLoad:(NSArray *)arguments;
-- (IBAction)infoButtonPressed:(id)sender;
+- (id)initWithIndex:(int)imageIndex viewController:(OpenFlowProjectViewController *)viewController;
 
 @end
