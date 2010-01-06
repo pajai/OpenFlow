@@ -65,7 +65,10 @@ const static CGFloat kReflectionFraction = 0.85;
 	
     self.scrollEnabled = YES;
     self.userInteractionEnabled = YES;
-    self.decelerationRate = UIScrollViewDecelerationRateFast;
+    
+//  UIScrollViewDecelerationRateNormal = 0.998
+//  UIScrollViewDecelerationRateFast = 0.990
+    self.decelerationRate = .992;
     [super setDelegate:self];
     
 	// Set some perspective
@@ -219,16 +222,44 @@ const static CGFloat kReflectionFraction = 0.85;
     }
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView;      // called when scroll view grinds to a halt
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView;                              // called on start of dragging (may require some time and or distance to move)
+{
+    NSLog(@"%s %f", _cmd, CACurrentMediaTime());
+}
+
+- (void)centerCoverHelper
 {
     [self centerOnSelectedCover:YES];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate; // called on finger up if user dragged. decelerate is true if it will continue moving afterwards
+{
+    NSLog(@"%s %f", _cmd, CACurrentMediaTime());
+    if(!decelerate)
+    {
+        [self centerOnSelectedCover:YES];
+    }
+}
+
+/*
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView;      // called when scroll view grinds to a halt
+{
+    NSLog(@"%s %f", _cmd, CACurrentMediaTime());
+
+}
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView;   // called on finger up as we are moving
+{
+    //[self centerOnSelectedCover:YES];
+    NSLog(@"%s %f", _cmd, CACurrentMediaTime());
+    //[self performSelector:@selector(centerCoverHelper) withObject:nil afterDelay:0.0];
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView; // called when setContentOffset/scrollRectVisible:animated: finishes. not called if not animating
 {
-    [self centerOnSelectedCover:YES];
+    //[self centerOnSelectedCover:YES];
+    NSLog(@"%s %f", _cmd, CACurrentMediaTime());
 }
-
+*/
 - (void)setContentOffset:(CGPoint)contentOffset
 {
     //NSLog(@"contentOffset = %@", NSStringFromCGPoint(contentOffset));
@@ -251,7 +282,7 @@ const static CGFloat kReflectionFraction = 0.85;
 
 - (void)setNumberOfImages:(int)newNumberOfImages {
 	numberOfImages = newNumberOfImages;
-	self.contentSize = CGSizeMake(newNumberOfImages * COVER_SPACING + self.bounds.size.width, self.bounds.size.height);
+	self.contentSize = CGSizeMake((newNumberOfImages-1)* COVER_SPACING + self.bounds.size.width, self.bounds.size.height);
     
 	int lowerBound = MAX(0, selectedCoverView.number - COVER_BUFFER);
 	int upperBound = MIN(self.numberOfImages - 1, selectedCoverView.number + COVER_BUFFER);
