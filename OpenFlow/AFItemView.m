@@ -33,7 +33,7 @@
 - (id)initWithFrame:(CGRect)frame {
 	if (self = [super initWithFrame:frame]) {
 		self.opaque = YES;
-		self.backgroundColor = NULL;
+		self.backgroundColor = nil;
 		verticalPosition = 0;
 		horizontalPosition = 0;
 		

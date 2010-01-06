@@ -280,11 +280,14 @@ const static CGFloat kReflectionFraction = 0.85;
 	if (!isDraggingACover)
 		return;
 	
-	CGPoint movedPoint = [[touches anyObject] locationInView:self];
+	CGPoint movedPoint = [[touches anyObject] locationInView:self]; //where we are now
+    CGPoint prevPoint = [[touches anyObject] previousLocationInView:self]; //where we just were
+    CGFloat xDirection = movedPoint.x - prevPoint.x;
+    
 	CGFloat offset = startPosition - (movedPoint.x / 1.5);
 	CGPoint newPoint = CGPointMake(offset, 0);
 	scrollView.contentOffset = newPoint;
-	int newCover = offset / COVER_SPACING;
+	int newCover = (offset / COVER_SPACING);
 	if (newCover != selectedCoverView.number) {
 		if (newCover < 0)
 			[self setSelectedCover:0];

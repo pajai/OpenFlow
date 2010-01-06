@@ -59,8 +59,8 @@
                                 gradientEndPoint, kCGGradientDrawsAfterEndLocation);
 	CGGradientRelease(grayScaleGradient);
 	
-	// add a black fill with 50% opacity
-	CGContextSetGrayFillColor(gradientBitmapContext, 0.0, 0.5);
+	// add a black fill with 60% opacity
+	CGContextSetGrayFillColor(gradientBitmapContext, 0.0, 0.60);
 	CGContextFillRect(gradientBitmapContext, CGRectMake(0, 0, 1, reflectionHeight));
     
     // convert the context into a CGImageRef and release the context
@@ -78,7 +78,12 @@
 	
 	[self drawAtPoint:CGPointZero];
 	CGContextRef context = UIGraphicsGetCurrentContext();
-	CGContextDrawImage(context, CGRectMake(0, self.size.height, self.size.width, reflectionHeight), reflectionImage);
+    CGRect imgRect = CGRectMake(0, self.size.height, self.size.width, reflectionHeight);
+
+    //black background to occlude covers behind this one
+    CGContextSetFillColorWithColor(context, [UIColor blackColor].CGColor);
+    CGContextFillRect(context, imgRect);
+	CGContextDrawImage(context, imgRect, reflectionImage);
 	
 	UIImage* result = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();

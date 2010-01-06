@@ -29,7 +29,7 @@
 
 @implementation AFOpenFlowViewController
 
-#error Change theses values to your Flickr API key & secret
+//#error Change theses values to your Flickr API key & secret
 #define flickrAPIKey @"MYAPIKEY"
 #define flickrAPISecret @"MYAPISECRET"
 
@@ -43,6 +43,7 @@
 }
 
 - (void)awakeFromNib {
+    [self setWantsFullScreenLayout:YES];
 	loadImagesOperationQueue = [[NSOperationQueue alloc] init];
 	UIAlertView *openFlowImageSourceAlertView = [[UIAlertView alloc] initWithTitle:@"OpenFlow Demo Data Source" 
 																		   message:@"Would you like to download images from Flickr or use 30 sample images included with this project?" 
