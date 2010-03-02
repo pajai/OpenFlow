@@ -32,7 +32,7 @@
 
 @interface AFOpenFlowView : UIScrollView <UIScrollViewDelegate> {
 	id <AFOpenFlowViewDataSource>	dataSource;
-	id <AFOpenFlowViewDelegate>	viewDelegate;
+	id <AFOpenFlowViewDelegate>	    viewDelegate;
 
 	NSMutableSet					*offscreenCovers;
 	NSMutableDictionary				*onscreenCovers;
