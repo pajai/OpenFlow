@@ -165,6 +165,7 @@ const static CGFloat kReflectionFraction = 0.85;
 }
 
 - (void)layoutCovers:(int)selected fromCover:(int)lowerBound toCover:(int)upperBound {
+//    NSLog(@"[%@ %s]", self, _cmd);
 	AFItemView *cover;
 	NSNumber *coverNumber;
 	for (int i = lowerBound; i <= upperBound; i++) {
@@ -220,17 +221,16 @@ const static CGFloat kReflectionFraction = 0.85;
 	[super dealloc];
 }
 
-- (void)setBounds:(CGRect)newSize {
-    //NSLog(@"%@ %s", self, _cmd);
-	[super setBounds:newSize];
-	
-	halfScreenWidth = self.bounds.size.width / 2;
-	halfScreenHeight = self.bounds.size.height / 2;
+- (void)layoutSubviews
+{
+//    NSLog(@"[%@ %s]", self, _cmd);
+    halfScreenWidth = self.bounds.size.width / 2;
+    halfScreenHeight = self.bounds.size.height / 2;
     
-	int lowerBound = MAX(-1, selectedCoverView.number - COVER_BUFFER);
-	int upperBound = MIN(self.numberOfImages - 1, selectedCoverView.number + COVER_BUFFER);
+    int lowerBound = MAX(-1, selectedCoverView.number - COVER_BUFFER);
+    int upperBound = MIN(self.numberOfImages - 1, selectedCoverView.number + COVER_BUFFER);
     
-	[self layoutCovers:selectedCoverView.number fromCover:lowerBound toCover:upperBound];
+    [self layoutCovers:selectedCoverView.number fromCover:lowerBound toCover:upperBound];
     [self setNumberOfImages:numberOfImages]; // resets view bounds and stuff
     CGPoint contentOffset = [self contentOffset];
     int targetCover = (int) roundf(contentOffset.x / COVER_SPACING);
@@ -245,11 +245,12 @@ const static CGFloat kReflectionFraction = 0.85;
 }
 
 #pragma mark UIScrollViewDelegate
-
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView;                              // called on start of dragging (may require some time and or distance to move)
-{
-    NSLog(@"%s %f", _cmd, CACurrentMediaTime());
-}
+//
+//- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView;                              
+//// called on start of dragging (may require some time and or distance to move)
+//{
+//    //NSLog(@"%s %f", _cmd, CACurrentMediaTime());
+//}
 
 - (void)centerCoverHelperAnimated
 {
@@ -258,7 +259,7 @@ const static CGFloat kReflectionFraction = 0.85;
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate; // called on finger up if user dragged. decelerate is true if it will continue moving afterwards
 {
-    NSLog(@"%s %f", _cmd, CACurrentMediaTime());
+    //NSLog(@"%s %f", _cmd, CACurrentMediaTime());
     if(!decelerate)
     {
         [self centerOnSelectedCover:YES];
@@ -311,14 +312,28 @@ const static CGFloat kReflectionFraction = 0.85;
 }
 
 #pragma mark UIScrollView
-- (void)setContentOffset:(CGPoint)contentOffset
-{
-    [super setContentOffset:contentOffset];
-}
+
+//-(void)setContentInset:(UIEdgeInsets)inset
+//{
+//    NSLog(@"[%@ %s%@]", self, _cmd, NSStringFromUIEdgeInsets(inset));
+//    
+//    [super setContentInset:inset];
+//}
+
+//-(void)setContentSize:(CGSize)contentSize
+//{
+//    NSLog(@"[%@ %s%@]", self, _cmd, NSStringFromCGSize(contentSize));
+//    [super setContentSize:contentSize];
+//}
+//- (void)setContentOffset:(CGPoint)contentOffset
+//{
+//    NSLog(@"[%@ %s%@]", self, _cmd, NSStringFromCGPoint(contentOffset));
+//    [super setContentOffset:contentOffset];
+//}
 
 - (void)setContentOffset:(CGPoint)contentOffset animated:(BOOL)animated;
 {
-    //    NSLog(@"contentOffset = %@ animated:%@", NSStringFromCGPoint(contentOffset), (animated) ? @"YES" : @"NO");
+//    NSLog(@"contentOffset = %@ animated:%@", NSStringFromCGPoint(contentOffset), (animated) ? @"YES" : @"NO");
     [super setContentOffset:contentOffset animated:animated];
     if(!animated)
     {
