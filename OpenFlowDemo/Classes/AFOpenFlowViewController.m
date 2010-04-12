@@ -125,8 +125,13 @@
 			// Use sample images, but load them all at once.
 			NSString *imageName;
 			for (int i=0; i < 30; i++) {
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30200
+				imageName = [[NSString alloc] initWithFormat:@"%d.png", i];
+#else
 				imageName = [[NSString alloc] initWithFormat:@"%d.jpg", i];
-				[(AFOpenFlowView *)self.view setImage:[UIImage imageNamed:imageName] forIndex:i];
+#endif
+            UIImage *img = [UIImage imageNamed:imageName];
+				[(AFOpenFlowView *)self.view setImage:img forIndex:i];
 				[imageName release];
 			}
 			[(AFOpenFlowView *)self.view setNumberOfImages:30]; 
