@@ -23,9 +23,9 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 #import "AFOpenFlowView.h"
-#import "AFOpenFlowConstants.h"
 #import "AFUIImageReflection.h"
 #import "SBNotifyingWindow.h"
+#import "AFOpenFlowGeometry.h"
 
 @interface AFOpenFlowView (hidden)
 
@@ -77,9 +77,10 @@ const static CGFloat kReflectionFraction = 0.85;
 	
 	// Set up the cover's left & right transforms.
 	leftTransform = CATransform3DIdentity;
-	leftTransform = CATransform3DRotate(leftTransform, SIDE_COVER_ANGLE, 0.0f, 1.0f, 0.0f);
+    CGFloat sideCoverAngle = [AFOpenFlowGeometry sideCoverAngle];
+	leftTransform = CATransform3DRotate(leftTransform, sideCoverAngle, 0.0f, 1.0f, 0.0f);
 	rightTransform = CATransform3DIdentity;
-	rightTransform = CATransform3DRotate(rightTransform, SIDE_COVER_ANGLE, 0.0f, -1.0f, 0.0f);
+	rightTransform = CATransform3DRotate(rightTransform, sideCoverAngle, 0.0f, -1.0f, 0.0f);
 	
     self.scrollEnabled = YES;
     self.userInteractionEnabled = YES;
@@ -132,16 +133,16 @@ const static CGFloat kReflectionFraction = 0.85;
 - (void)layoutCover:(AFItemView *)aCover selectedCover:(int)selectedIndex animated:(Boolean)animated  {
 	int coverNumber = aCover.number;
 	CATransform3D newTransform;
-	CGFloat newZPosition = SIDE_COVER_ZPOSITION;
+	CGFloat newZPosition = [AFOpenFlowGeometry sideCoverZPosition];
 	CGPoint newPosition;
 	
 	newPosition.x = halfScreenWidth + aCover.horizontalPosition;
 	newPosition.y = halfScreenHeight + aCover.verticalPosition;
 	if (coverNumber < selectedIndex) {
-		newPosition.x -= CENTER_COVER_OFFSET;
+		newPosition.x -= [AFOpenFlowGeometry centerCoverOffset];
 		newTransform = leftTransform;
 	} else if (coverNumber > selectedIndex) {
-		newPosition.x += CENTER_COVER_OFFSET;
+		newPosition.x += [AFOpenFlowGeometry centerCoverOffset];
 		newTransform = rightTransform;
 	} else {
 		newZPosition = 0;
@@ -165,7 +166,7 @@ const static CGFloat kReflectionFraction = 0.85;
 }
 
 - (void)layoutCovers:(int)selected fromCover:(int)lowerBound toCover:(int)upperBound {
-//    NSLog(@"[%@ %s]", self, _cmd);
+    //    NSLog(@"[%@ %s]", self, _cmd);
 	AFItemView *cover;
 	NSNumber *coverNumber;
 	for (int i = lowerBound; i <= upperBound; i++) {
@@ -223,7 +224,7 @@ const static CGFloat kReflectionFraction = 0.85;
 
 - (void)layoutSubviews
 {
-//    NSLog(@"[%@ %s]", self, _cmd);
+    //    NSLog(@"[%@ %s]", self, _cmd);
     halfScreenWidth = self.bounds.size.width / 2;
     halfScreenHeight = self.bounds.size.height / 2;
     
@@ -233,7 +234,7 @@ const static CGFloat kReflectionFraction = 0.85;
     [self layoutCovers:selectedCoverView.number fromCover:lowerBound toCover:upperBound];
     [self setNumberOfImages:numberOfImages]; // resets view bounds and stuff
     CGPoint contentOffset = [self contentOffset];
-    int targetCover = (int) roundf(contentOffset.x / COVER_SPACING);
+    int targetCover = (int) roundf(contentOffset.x / [AFOpenFlowGeometry coverSpacing]);
     if (targetCover != selectedCoverView.number) {
         if (targetCover < 0)
             [self setSelectedCover:0];
@@ -333,7 +334,7 @@ const static CGFloat kReflectionFraction = 0.85;
 
 - (void)setContentOffset:(CGPoint)contentOffset animated:(BOOL)animated;
 {
-//    NSLog(@"contentOffset = %@ animated:%@", NSStringFromCGPoint(contentOffset), (animated) ? @"YES" : @"NO");
+    //    NSLog(@"contentOffset = %@ animated:%@", NSStringFromCGPoint(contentOffset), (animated) ? @"YES" : @"NO");
     [super setContentOffset:contentOffset animated:animated];
     if(!animated)
     {
@@ -343,7 +344,7 @@ const static CGFloat kReflectionFraction = 0.85;
 
 - (void)setNumberOfImages:(int)newNumberOfImages {
 	numberOfImages = newNumberOfImages;
-	self.contentSize = CGSizeMake((newNumberOfImages-1)* COVER_SPACING + self.bounds.size.width, self.bounds.size.height);
+	self.contentSize = CGSizeMake((newNumberOfImages-1)* [AFOpenFlowGeometry coverSpacing] + self.bounds.size.width, self.bounds.size.height);
     
 	int lowerBound = MAX(0, selectedCoverView.number - COVER_BUFFER);
 	int upperBound = MIN(self.numberOfImages - 1, selectedCoverView.number + COVER_BUFFER);
@@ -392,9 +393,17 @@ const static CGFloat kReflectionFraction = 0.85;
 		AFItemView *targetCover = [self findCoverOnscreen:targetLayer];
 		if (targetCover && (targetCover.number != selectedCoverView.number))
         {
-            CGPoint selectedOffset = CGPointMake(COVER_SPACING * targetCover.number, 0);
+            CGPoint selectedOffset = CGPointMake([AFOpenFlowGeometry coverSpacing] * targetCover.number, 0);
             [self setContentOffset:selectedOffset animated:YES];
         }
+    }
+    if ([touch tapCount] == 2) 
+    {
+        // Which cover did the user double tap?
+        CGPoint targetPoint = [[touches anyObject] locationInView:[self appWindow]];
+        CALayer *targetLayer = (CALayer *)[self.layer hitTest:targetPoint];
+        AFItemView *targetCover = [self findCoverOnscreen:targetLayer];
+        NSLog(@"Double tapped %@", targetCover);
     }
 }
 
@@ -404,7 +413,7 @@ const static CGFloat kReflectionFraction = 0.85;
 }
 
 - (void)centerOnSelectedCover:(BOOL)animated {
-	CGPoint selectedOffset = CGPointMake(COVER_SPACING * selectedCoverView.number, 0);
+	CGPoint selectedOffset = CGPointMake([AFOpenFlowGeometry coverSpacing] * selectedCoverView.number, 0);
 	[self setContentOffset:selectedOffset animated:animated];
 }
 

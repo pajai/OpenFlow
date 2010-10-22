@@ -123,14 +123,17 @@
 			[interestingnessRequest callAPIMethodWithGET:@"flickr.interestingness.getList" arguments:nil];
 		} else if (buttonIndex == 1) {
 			// Use sample images, but load them all at once.
-			NSString *imageName;
+			NSString *imageName = nil;
 			for (int i=0; i < 30; i++) {
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30200
-				imageName = [[NSString alloc] initWithFormat:@"%d.png", i];
-#else
-				imageName = [[NSString alloc] initWithFormat:@"%d.jpg", i];
-#endif
-            UIImage *img = [UIImage imageNamed:imageName];
+                if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+                {
+                    imageName = [[NSString alloc] initWithFormat:@"%d.png", i];
+                }
+                else 
+                {
+                    imageName = [[NSString alloc] initWithFormat:@"%d.jpg", i];
+                }
+                UIImage *img = [UIImage imageNamed:imageName];
 				[(AFOpenFlowView *)self.view setImage:img forIndex:i];
 				[imageName release];
 			}
@@ -151,20 +154,13 @@
 	// Resize the image on the main thread (UIKit is not thread safe).
 	if (interestingnessRequest)
 		loadedImage = [loadedImage cropCenterAndScaleImageToSize:CGSizeMake(225, 225)];
-
+    
 	[(AFOpenFlowView *)self.view setImage:loadedImage forIndex:[imageIndex intValue]];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
 	return YES;
 }
-//
-//- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation;
-//{
-//    CGRect frame = [self.view frame];
-//    frame.origin.x = frame.origin.y = 0;
-//    openFlowView.frame = frame;
-//}
 
 - (UIImage *)defaultImage {
 	return [UIImage imageNamed:@"default.png"];
@@ -172,7 +168,7 @@
 
 - (void)openFlowView:(AFOpenFlowView *)openFlowView requestImageForIndex:(int)index {
 	AFGetImageOperation *getImageOperation = [[AFGetImageOperation alloc] initWithIndex:index viewController:self];
-
+    
 	if (interestingnessRequest) {
 		// We're getting our images from the Flickr API.
 		NSDictionary *photoDictionary = [[interestingPhotosDictionary valueForKeyPath:@"photos.photo"] objectAtIndex:index];
@@ -184,8 +180,10 @@
 	[getImageOperation release];
 }
 
-- (void)openFlowView:(AFOpenFlowView *)openFlowView selectionDidChange:(int)index {
-	NSLog(@"Cover Flow selection did change to %d", index);
-}
+// implement this if you care when a cover comes to front.
+
+//- (void)openFlowView:(AFOpenFlowView *)openFlowView selectionDidChange:(int)index {
+//	NSLog(@"Cover Flow selection did change to %d", index);
+//}
 
 @end

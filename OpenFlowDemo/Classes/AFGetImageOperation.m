@@ -57,15 +57,16 @@
 												 withObject:[NSArray arrayWithObjects:photo, [NSNumber numberWithInt:photoIndex], nil] 
 											  waitUntilDone:YES];
 		}
-	} else {
-		// Load an image named photoIndex.jpg from our Resources.
-        
+	} else {        
         NSString *imageName = nil;
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30200
-         imageName = [[NSString alloc] initWithFormat:@"%d.png", photoIndex];
-#else
-        imageName = [[NSString alloc] initWithFormat:@"%d.jpg", photoIndex];
-#endif
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+        {
+            imageName = [[NSString alloc] initWithFormat:@"%d.png", photoIndex];
+        }
+        else 
+        {
+            imageName = [[NSString alloc] initWithFormat:@"%d.jpg", photoIndex];
+        }
 		UIImage *theImage = [UIImage imageNamed:imageName];
 		if (theImage) {
 			[mainViewController performSelectorOnMainThread:@selector(imageDidLoad:) 
