@@ -71,6 +71,8 @@
 		AB7315BF117383AC00B4F31C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8695F2620FEF5695007C374C /* QuartzCore.framework */; };
 		AB7315C0117383AC00B4F31C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8646BCAE101E8D6B000F86C1 /* CFNetwork.framework */; };
 		AB7315C8117383AD00B4F31C /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB7315C7117383AD00B4F31C /* MainWindow.xib */; };
+		ABB6D360134C267D0027EDCA /* default.png in Resources */ = {isa = PBXBuildFile; fileRef = ABB6D35F134C267D0027EDCA /* default.png */; };
+		ABB6D361134C267D0027EDCA /* default.png in Resources */ = {isa = PBXBuildFile; fileRef = ABB6D35F134C267D0027EDCA /* default.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -159,6 +161,7 @@
 		AB4532DE1272307000774561 /* AFOpenFlowGeometry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFOpenFlowGeometry.m; sourceTree = "<group>"; };
 		AB7315C4117383AC00B4F31C /* AFOpenFlowDemo-iPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AFOpenFlowDemo-iPad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB7315C7117383AD00B4F31C /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = "Resources-iPad/MainWindow.xib"; sourceTree = "<group>"; };
+		ABB6D35F134C267D0027EDCA /* default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default.png; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +245,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				ABB6D35F134C267D0027EDCA /* default.png */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* AFOpenFlowDemo-Info.plist */,
 			);
@@ -425,6 +429,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
+				ABB6D360134C267D0027EDCA /* default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,6 +468,7 @@
 				AB17381A1173950C00E7D496 /* 27.png in Resources */,
 				AB17381B1173950C00E7D496 /* 28.png in Resources */,
 				AB17387C1173987000E7D496 /* 29.png in Resources */,
+				ABB6D361134C267D0027EDCA /* default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,8 +564,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"ARCHS[sdk=iphoneos*]" = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
-				"ARCHS[sdk=iphonesimulator*]" = i386;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -574,7 +579,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				PRODUCT_NAME = "AFOpenFlowDemo-iPad";
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				SDKROOT = iphoneos3.2;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -583,8 +587,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"ARCHS[sdk=iphoneos*]" = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
-				"ARCHS[sdk=iphonesimulator*]" = i386;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AFOpenFlowDemo_Prefix.pch;
@@ -597,7 +600,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				PRODUCT_NAME = "AFOpenFlowDemo-iPad";
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				SDKROOT = iphoneos3.2;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
@@ -613,7 +615,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				PREBINDING = NO;
-				SDKROOT = iphoneos4.1;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -629,7 +631,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				PREBINDING = NO;
-				SDKROOT = iphoneos4.1;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;

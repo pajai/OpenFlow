@@ -51,6 +51,8 @@
 		AB1C19CF10F464D10060F12D /* 27.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB1C19B010F464D10060F12D /* 27.jpg */; };
 		AB1C19D010F464D10060F12D /* 28.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB1C19B110F464D10060F12D /* 28.jpg */; };
 		AB1C19D110F464D10060F12D /* 29.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB1C19B210F464D10060F12D /* 29.jpg */; };
+		ABB6D303134C257B0027EDCA /* AFOpenFlowGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = ABB6D300134C257B0027EDCA /* AFOpenFlowGeometry.m */; };
+		ABB6D304134C257B0027EDCA /* SBNotifyingWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = ABB6D302134C257B0027EDCA /* SBNotifyingWindow.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +110,10 @@
 		AB1C19B010F464D10060F12D /* 27.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 27.jpg; path = "../OpenFlowDemo/Sample Images/27.jpg"; sourceTree = SOURCE_ROOT; };
 		AB1C19B110F464D10060F12D /* 28.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 28.jpg; path = "../OpenFlowDemo/Sample Images/28.jpg"; sourceTree = SOURCE_ROOT; };
 		AB1C19B210F464D10060F12D /* 29.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 29.jpg; path = "../OpenFlowDemo/Sample Images/29.jpg"; sourceTree = SOURCE_ROOT; };
+		ABB6D2FF134C257B0027EDCA /* AFOpenFlowGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFOpenFlowGeometry.h; sourceTree = "<group>"; };
+		ABB6D300134C257B0027EDCA /* AFOpenFlowGeometry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFOpenFlowGeometry.m; sourceTree = "<group>"; };
+		ABB6D301134C257B0027EDCA /* SBNotifyingWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBNotifyingWindow.h; sourceTree = "<group>"; };
+		ABB6D302134C257B0027EDCA /* SBNotifyingWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBNotifyingWindow.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +199,10 @@
 		AB1C193310F4630A0060F12D /* OpenFlow */ = {
 			isa = PBXGroup;
 			children = (
+				ABB6D2FF134C257B0027EDCA /* AFOpenFlowGeometry.h */,
+				ABB6D300134C257B0027EDCA /* AFOpenFlowGeometry.m */,
+				ABB6D301134C257B0027EDCA /* SBNotifyingWindow.h */,
+				ABB6D302134C257B0027EDCA /* SBNotifyingWindow.m */,
 				AB1C193410F4630A0060F12D /* AFItemView.h */,
 				AB1C193510F4630A0060F12D /* AFItemView.m */,
 				AB1C193610F4630A0060F12D /* AFOpenFlowConstants.h */,
@@ -342,6 +352,8 @@
 				AB1C193B10F4630A0060F12D /* AFItemView.m in Sources */,
 				AB1C193C10F4630A0060F12D /* AFOpenFlowView.m in Sources */,
 				AB1C193D10F4630A0060F12D /* AFUIImageReflection.m in Sources */,
+				ABB6D303134C257B0027EDCA /* AFOpenFlowGeometry.m in Sources */,
+				ABB6D304134C257B0027EDCA /* SBNotifyingWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,7 +396,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PREBINDING = NO;
-				SDKROOT = iphoneos4.1;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -398,7 +410,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PREBINDING = NO;
-				SDKROOT = iphoneos4.1;
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};
