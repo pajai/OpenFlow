@@ -16,7 +16,7 @@
 {
     static CGFloat sideCoverAngle;
     if (!sideCoverAngle) {
-        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
         {
             sideCoverAngle = 0.79f;
         }
@@ -33,7 +33,7 @@
 {
     static CGFloat sideCoverZPosition;
     if (!sideCoverZPosition) {
-        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
         {
             sideCoverZPosition = -100.0f;
         }
@@ -49,7 +49,7 @@
 {
     static CGFloat coverSpacing;
     if (!coverSpacing) {
-        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
         {
             coverSpacing = 60.0f;
         }
@@ -65,7 +65,7 @@
 {
     static CGFloat centerCoverOffset;
     if (!centerCoverOffset) {
-        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
         {
             centerCoverOffset = 70.0f;
         }
