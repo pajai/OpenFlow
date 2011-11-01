@@ -48,7 +48,7 @@
 	
 	AFItemView						*selectedCoverView;
 
-	CATransform3D leftTransform, rightTransform;
+	CATransform3D leftTransform, rightTransform, middleTransform;
 	
 	CGFloat halfScreenHeight;
 	CGFloat halfScreenWidth;

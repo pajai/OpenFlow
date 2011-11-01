@@ -82,7 +82,6 @@
 		AB28F170134C2C0400DD8914 /* 8.png in Resources */ = {isa = PBXBuildFile; fileRef = AB28F152134C2C0400DD8914 /* 8.png */; };
 		AB28F171134C2C0400DD8914 /* 9.png in Resources */ = {isa = PBXBuildFile; fileRef = AB28F153134C2C0400DD8914 /* 9.png */; };
 		ABB6D303134C257B0027EDCA /* AFOpenFlowGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = ABB6D300134C257B0027EDCA /* AFOpenFlowGeometry.m */; };
-		ABB6D304134C257B0027EDCA /* SBNotifyingWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = ABB6D302134C257B0027EDCA /* SBNotifyingWindow.m */; };
 		ABB6D39D134C27BC0027EDCA /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABB6D39C134C27BC0027EDCA /* MainWindow-iPad.xib */; };
 /* End PBXBuildFile section */
 
@@ -173,8 +172,6 @@
 		AB28F153134C2C0400DD8914 /* 9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 9.png; sourceTree = "<group>"; };
 		ABB6D2FF134C257B0027EDCA /* AFOpenFlowGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFOpenFlowGeometry.h; sourceTree = "<group>"; };
 		ABB6D300134C257B0027EDCA /* AFOpenFlowGeometry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFOpenFlowGeometry.m; sourceTree = "<group>"; };
-		ABB6D301134C257B0027EDCA /* SBNotifyingWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBNotifyingWindow.h; sourceTree = "<group>"; };
-		ABB6D302134C257B0027EDCA /* SBNotifyingWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBNotifyingWindow.m; sourceTree = "<group>"; };
 		ABB6D39C134C27BC0027EDCA /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "Resources-iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -264,8 +261,6 @@
 			children = (
 				ABB6D2FF134C257B0027EDCA /* AFOpenFlowGeometry.h */,
 				ABB6D300134C257B0027EDCA /* AFOpenFlowGeometry.m */,
-				ABB6D301134C257B0027EDCA /* SBNotifyingWindow.h */,
-				ABB6D302134C257B0027EDCA /* SBNotifyingWindow.m */,
 				AB1C193410F4630A0060F12D /* AFItemView.h */,
 				AB1C193510F4630A0060F12D /* AFItemView.m */,
 				AB1C193610F4630A0060F12D /* AFOpenFlowConstants.h */,
@@ -496,7 +491,6 @@
 				AB1C193C10F4630A0060F12D /* AFOpenFlowView.m in Sources */,
 				AB1C193D10F4630A0060F12D /* AFUIImageReflection.m in Sources */,
 				ABB6D303134C257B0027EDCA /* AFOpenFlowGeometry.m in Sources */,
-				ABB6D304134C257B0027EDCA /* SBNotifyingWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
