@@ -229,12 +229,16 @@ const static CGFloat kReflectionFraction = 0.85;
     halfScreenHeight = self.bounds.size.height / 2;
     
     int lowerBound = MAX(-1, selectedCoverView.number - COVER_BUFFER);
-    int upperBound = MIN(self.numberOfImages - 1, selectedCoverView.number + COVER_BUFFER);
+    int upperBound = MIN(self.numberOfImages - 1, selectedCoverView.number + \
+						                          COVER_BUFFER);
     
-    [self layoutCovers:selectedCoverView.number fromCover:lowerBound toCover:upperBound];
+    [self layoutCovers:selectedCoverView.number 
+			 fromCover:lowerBound 
+			   toCover:upperBound];
     [self setNumberOfImages:numberOfImages]; // resets view bounds and stuff
     CGPoint contentOffset = [self contentOffset];
-    int targetCover = (int) roundf(contentOffset.x / [AFOpenFlowGeometry coverSpacing]);
+    int targetCover = (int) roundf(contentOffset.x / 
+								   [AFOpenFlowGeometry coverSpacing]);
     if (targetCover != selectedCoverView.number) {
         if (targetCover < 0)
             [self setSelectedCover:0];
