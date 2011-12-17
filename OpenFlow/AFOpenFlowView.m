@@ -28,19 +28,21 @@
 
 @interface AFOpenFlowView (hidden)
 
-- (void)setUpInitialState;
 - (AFItemView *)coverForIndex:(int)coverIndex;
 - (void)updateCoverImage:(AFItemView *)aCover;
 - (AFItemView *)dequeueReusableCover;
 - (void)layoutCovers:(int)selected fromCover:(int)lowerBound toCover:(int)upperBound;
 - (void)layoutCover:(AFItemView *)aCover selectedCover:(int)selectedIndex animated:(Boolean)animated;
 - (AFItemView *)findCoverOnscreen:(CALayer *)targetLayer;
+- (void)notifyCoverTapped;
 
 @end
 
-@implementation AFOpenFlowView (hidden)
+@implementation AFOpenFlowView
 
-const static CGFloat kReflectionFraction = 0.85;
+// parameters for reflection
+const static CGFloat kReflectionFraction = 0.65;
+const static CGFloat kReflectionAlpha    = 0.30;
 
 - (void)setUpInitialState {
         
@@ -77,7 +79,7 @@ const static CGFloat kReflectionFraction = 0.85;
     
 	// Set some perspective
 	CATransform3D sublayerTransform = CATransform3DIdentity;
-	sublayerTransform.m34 = -0.01;
+	sublayerTransform.m34 = -0.003;
 	[self.layer setSublayerTransform:sublayerTransform];
 }
 
@@ -88,13 +90,11 @@ const static CGFloat kReflectionFraction = 0.85;
 		coverView = [[[AFItemView alloc] initWithFrame:CGRectZero] autorelease];
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
         [coverView addGestureRecognizer:tapGesture];
-//        [tapGesture setDelegate:self];
         [tapGesture release];
         
         UITapGestureRecognizer *doubleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewDoubleTapped:)];
         [doubleTapGesture setNumberOfTapsRequired:2];
         [coverView addGestureRecognizer:doubleTapGesture];
-        //        [tapGesture setDelegate:self];
         [doubleTapGesture release];
 
     }
@@ -182,10 +182,7 @@ const static CGFloat kReflectionFraction = 0.85;
 	
 	return aCover;
 }
-@end
 
-
-@implementation AFOpenFlowView
 @synthesize dataSource, viewDelegate, numberOfImages, defaultImage;
 
 #define COVER_BUFFER 6
@@ -203,7 +200,21 @@ const static CGFloat kReflectionFraction = 0.85;
 }
 
 - (void)dealloc {
+    [self releaseAll];
+	
+	[super dealloc];
+}
+
+- (void)releaseAll
+{
+    for (id key in onscreenCovers) {
+        AFItemView* cover = [onscreenCovers objectForKey:key];
+        [cover removeFromSuperview];
+    }
+    
+    [[self appWindow] removeObjectWithInterest:self];
 	[defaultImage release];
+    defaultImage = nil;
 	
 	[coverImages release];
 	[coverImageHeights release];
@@ -212,8 +223,6 @@ const static CGFloat kReflectionFraction = 0.85;
 	
 	[onscreenCovers removeAllObjects];
 	[onscreenCovers release];
-	
-	[super dealloc];
 }
 
 - (void)layoutSubviews
@@ -280,12 +289,12 @@ const static CGFloat kReflectionFraction = 0.85;
 - (void)setDefaultImage:(UIImage *)newDefaultImage {
 	[defaultImage release];
 	defaultImageHeight = newDefaultImage.size.height;
-	defaultImage = [[newDefaultImage addImageReflection:kReflectionFraction] retain];
+	defaultImage = [[newDefaultImage addImageReflection:kReflectionFraction backgroundColor:self.backgroundColor alpha:kReflectionAlpha] retain];
 }
 
 - (void)setImage:(UIImage *)image forIndex:(int)index {
 	// Create a reflection for this image.
-	UIImage *imageWithReflection = [image addImageReflection:kReflectionFraction];
+	UIImage *imageWithReflection = [image addImageReflection:kReflectionFraction backgroundColor:self.backgroundColor alpha:kReflectionAlpha];
 	NSNumber *coverNumber = [NSNumber numberWithInt:index];
 	[coverImages setObject:imageWithReflection forKey:coverNumber];
 	[coverImageHeights setObject:[NSNumber numberWithFloat:image.size.height] forKey:coverNumber];
@@ -307,6 +316,9 @@ const static CGFloat kReflectionFraction = 0.85;
         CGPoint selectedOffset = CGPointMake([AFOpenFlowGeometry coverSpacing] * targetCover.number, 0);
         [self setContentOffset:selectedOffset animated:YES];
     }
+    else {
+        [self notifyCoverTapped];
+    }
 }
 
 -(void)viewDoubleTapped:(UIGestureRecognizer *)sender
@@ -327,6 +339,13 @@ const static CGFloat kReflectionFraction = 0.85;
     // And send the delegate the newly selected cover message.
     if ([self.viewDelegate respondsToSelector:@selector(openFlowView:selectionDidChange:)])
         [self.viewDelegate openFlowView:self selectionDidChange:selectedCoverView.number];
+}
+
+-(void)notifyCoverTapped
+{
+    // And send the delegate the newly selected cover message.
+    if ([self.viewDelegate respondsToSelector:@selector(openFlowView:coverTapped:)])
+        [self.viewDelegate openFlowView:self coverTapped:selectedCoverView.number];
 }
 
 - (void)setSelectedCover:(int)newSelectedCover {

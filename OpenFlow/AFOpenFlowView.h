@@ -67,12 +67,15 @@
 - (void)setSelectedCover:(int)newSelectedCover;
 - (void)centerOnSelectedCover:(BOOL)animated;
 - (void)setImage:(UIImage *)image forIndex:(int)index;
+- (void)setUpInitialState;
+- (void)releaseAll;
 
 @end
 
 @protocol AFOpenFlowViewDelegate <NSObject>
 @optional
 - (void)openFlowView:(AFOpenFlowView *)openFlowView selectionDidChange:(int)index;
+- (void)openFlowView:(AFOpenFlowView *)openFlowView coverTapped:(int)index;
 @end
 
 @protocol AFOpenFlowViewDataSource <NSObject>

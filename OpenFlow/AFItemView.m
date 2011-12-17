@@ -45,6 +45,11 @@
 	return self;
 }
 
+- (BOOL) canBecomeFirstResponder
+{
+    return YES;
+}
+
 - (void)setImage:(UIImage *)newImage originalImageHeight:(CGFloat)imageHeight reflectionFraction:(CGFloat)reflectionFraction {
 	[imageView setImage:newImage];
 	verticalPosition = imageHeight * reflectionFraction / 2;
