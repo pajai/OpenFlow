@@ -23,3 +23,18 @@ The source code for both OpenFlow and the AFOpenFlowDemo project are currently a
 
 Enjoy!
 -Alex
+
+---
+
+I have done a couple of changes/bugfixes to OpenFlow to fit my needs:
+
+- Flow behavior of the covers has been tuned. The new one feels more natural to me.
+- Cover spacing has been changed so that we see in full the previous and next cover (This makes better use of the screen space on the iPad).
+- A custom background colour can be used (other than black).
+- The callback delegate has been extended to support also tapped cover events.
+
+I would like to thank Alex for the original OpenFlow implementation and Johnatan for the iOS 5 bug fix.
+
+Cheers
+
+Patrick / @xrb
