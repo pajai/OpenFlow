@@ -33,7 +33,7 @@ I have done a couple of changes/bugfixes to OpenFlow to fit my needs:
 - A custom background colour can be used (other than black).
 - The callback delegate has been extended to support also tapped cover events.
 
-I would like to thank Alex for the original OpenFlow implementation and Johnatan for the iOS 5 bug fix.
+I would like to thank Alex for the original OpenFlow implementation and Johnatan for the numerous bug fixes.
 
 Cheers
 
